@@ -71,6 +71,8 @@ int main(int argc, char *argv[]) {
        	printf("Uppercase string: ");
 	lowercase_to_uppercase_ascii(input);
 	printf("\n");
+	return print_byte_as_cp(argv[1]);
+
 }
 
 bool is_valid_ascii(unsigned char *str) {
@@ -114,12 +116,3 @@ int num_codepoints (char *str){
     }
     return num;
 }
-
-<<<<<<< Updated upstream
-=======
-    // implement the UTF-8 analyzer here  
-    return print_byte_as_cp(argv[1]);
-}
-
-
->>>>>>> Stashed changes
