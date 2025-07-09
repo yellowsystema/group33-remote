@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+<<<<<<< HEAD
 bool is_valid_ascii(unsigned char *str) {
 	int index = 0;
 	while (str[index] != 0){
@@ -39,3 +40,34 @@ int main(int argc, char *argv[]) {
 	lowercase_to_uppercase_ascii(input);
 	printf("\n");
 }
+=======
+int main(int argc, char *argv[]) {
+   if (argc != 2) {
+       fprintf(stderr, "Usage: utf8analyzer \"<UTF-8 encoded string>\"\n");
+       return 1;
+   }
+}
+
+
+    // implement the UTF-8 analyzer here
+int get_bytes_length (char *str){
+    int len = 0;
+    while (str[len] != 0){
+        len += 1;
+    }
+    return len;
+}
+
+int num_codepoints (char *str){
+    int num = 0;
+    for (int i = 0; str[i] != 0; i++){
+        unsigned char byte = str[i];
+        if ((byte & 0xC0) != 0x80){
+            num += 1;
+        }
+    }
+    return num;
+}
+
+
+>>>>>>> b99ac1871020213032c17087974280a37d0db11a
