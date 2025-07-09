@@ -4,29 +4,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-<<<<<<< HEAD
-bool is_valid_ascii(unsigned char *str) {
-	int index = 0;
-	while (str[index] != 0){
-		if (str[index] > 127){
-			return false;
-	     	}
-		index++;
-	}
-	return true;
-}
-
-void lowercase_to_uppercase_ascii(unsigned char *str){
-	int intdex = 0;
-	while(str[index] != 0){
-		if (str[index] >= 'a' && str[index] <= 'z'){
-			printf("%c", str[index] - 32);
-		} else {
-			printf("%c", str[index]);											}
-		index++;
-	}
-}
-
 int main(int argc, char *argv[]) {
 	if (argc != 2) {
 	       	fprintf(stderr, "Usage: utf8analyzer \"<UTF-8 encoded string>\"\n");
@@ -40,16 +17,30 @@ int main(int argc, char *argv[]) {
 	lowercase_to_uppercase_ascii(input);
 	printf("\n");
 }
-=======
-int main(int argc, char *argv[]) {
-   if (argc != 2) {
-       fprintf(stderr, "Usage: utf8analyzer \"<UTF-8 encoded string>\"\n");
-       return 1;
-   }
+
+bool is_valid_ascii(unsigned char *str) {
+	int index = 0; 
+	while (str[index] != 0){
+		if (str[index] > 127){
+			return false;
+		}
+		index++;
+	}
+	return true;
 }
 
+void lowercase_to_uppercase_ascii(unsigned char *str){
+	int index = 0; 
+	while (str[index] != 0){
+		if (str[index] >= 'a' && str[index] <= 'z'){
+			printf("%c", str[index] - 32);
+		} else {
+			printf("%c", str[index]);
+		}
+		index++;
+	}
+}
 
-    // implement the UTF-8 analyzer here
 int get_bytes_length (char *str){
     int len = 0;
     while (str[len] != 0){
@@ -69,5 +60,3 @@ int num_codepoints (char *str){
     return num;
 }
 
-
->>>>>>> b99ac1871020213032c17087974280a37d0db11a
