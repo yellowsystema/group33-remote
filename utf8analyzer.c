@@ -102,38 +102,32 @@ int num_codepoints (char *str){
     }
     return num;
 }
-#include <stdio.h>
-#include <stdlib.h>
 
-// Decode one UTF-8 code point, return code point and advance *i
-// input: utf8 string s, current index *i
-// returns Unicode code point as int
 int utf8_to_codepoint(const char *s, int *i) {
     unsigned char c = s[*i];
     int codepoint = 0;
     int bytes = 0;
 
-    if ((c & 0x80) == 0) {  // 1-byte ASCII
+    if ((c & 0x80) == 0) {  
         codepoint = c;
         bytes = 1;
-    } else if ((c & 0xE0) == 0xC0) {  // 2-byte UTF-8
+    } else if ((c & 0xE0) == 0xC0) { 
         codepoint = c & 0x1F;
         bytes = 2;
-    } else if ((c & 0xF0) == 0xE0) {  // 3-byte UTF-8
+    } else if ((c & 0xF0) == 0xE0) {  
         codepoint = c & 0x0F;
         bytes = 3;
-    } else if ((c & 0xF8) == 0xF0) {  // 4-byte UTF-8
+    } else if ((c & 0xF8) == 0xF0) {  
         codepoint = c & 0x07;
         bytes = 4;
     } else {
-        (*i)++;  // invalid byte, skip
-        return 0xFFFD;  // replacement char
+        (*i)++;  
+        return 0xFFFD;
     }
 
     for (int j = 1; j < bytes; j++) {
         unsigned char cc = s[*i + j];
         if ((cc & 0xC0) != 0x80) {
-            // Invalid continuation byte
             (*i) += j;
             return 0xFFFD;
         }
@@ -144,11 +138,7 @@ int utf8_to_codepoint(const char *s, int *i) {
     return codepoint;
 }
 
-// Check if Unicode codepoint is an animal emoji (rough ranges)
 int is_animal_emoji(int cp) {
-    // Examples of animal emoji ranges:
-    // 🐀 U+1F400 to 🦿 U+1F9FF covers many animal emojis and others
-    // Let's keep it simple and check 1F400–1F4FF and 1F900–1F9FF as animal emoji zones
     if ((cp >= 0x1F400 && cp <= 0x1F4FF) || (cp >= 0x1F900 && cp <= 0x1F9FF)) {
         return 1;
     }
@@ -161,7 +151,7 @@ void print_first_6_codepoints(const char *input) {
     while (input[i] != '\0' && count < 6) {
         int start = i;
         int cp = utf8_to_codepoint(input, &i);
-        if (cp == 0xFFFD) break;  // stop on invalid utf8
+        if (cp == 0xFFFD) break;  
 
         for (int j = start; j < i; j++) {
             putchar(input[j]);
